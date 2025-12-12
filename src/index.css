@@ -177,3 +177,13 @@
 .animation-delay-600 {
   animation-delay: 600ms;
 }
+
+@keyframes lightning-flash {
+  0%, 100% { opacity: 0; }
+  10%, 30% { opacity: 1; }
+  20% { opacity: 0.3; }
+}
+
+.animate-lightning-flash {
+  animation: lightning-flash 0.3s ease-out forwards;
+}

@@ -1,5 +1,6 @@
 import { ExternalLink, Star, GitFork } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface ProjectCardProps {
   name: string;

@@ -1,14 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { StarDecoration } from "@/components/StarDecoration";
+import { LightningEffect } from "@/components/LightningEffect";
+import { Scene3D } from "@/components/Scene3D";
 import { Github, ArrowDown } from "lucide-react";
 import stableTurboLogo from "@/assets/stable-turbo-logo.png";
 
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* 3D Background */}
+      <Scene3D className="opacity-60" />
+      
+      {/* Lightning Effect */}
+      <LightningEffect className="opacity-40" />
+      
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
-      
       {/* Decorative stars */}
       <StarDecoration 
         size="lg" 
