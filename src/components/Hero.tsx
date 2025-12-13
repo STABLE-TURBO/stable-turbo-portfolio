@@ -1,12 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { StarDecoration } from "@/components/StarDecoration";
 import { LightningEffect } from "@/components/LightningEffect";
+import { ParticleField } from "@/components/ParticleField";
+import { FloatingOrbs } from "@/components/FloatingOrbs";
+import { AnimatedGradientBg } from "@/components/AnimatedGradientBg";
 import { Github, ArrowDown } from "lucide-react";
 import stableTurboLogo from "@/assets/stable-turbo-logo.png";
 
 export const Hero = () => {
   return (
     <section className="relative min-h-screen flex flex-col items-center justify-center px-6 overflow-hidden">
+      {/* Animated gradient background */}
+      <AnimatedGradientBg />
+      
+      {/* Floating orbs */}
+      <FloatingOrbs className="opacity-70" />
+      
+      {/* Particle field */}
+      <ParticleField className="opacity-50" />
+      
       {/* Lightning Effect */}
       <LightningEffect className="opacity-40" />
       
