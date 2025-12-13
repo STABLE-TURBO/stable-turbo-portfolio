@@ -1,5 +1,7 @@
 import { Zap, Shield, Users } from "lucide-react";
 import { StarDecoration } from "@/components/StarDecoration";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
+import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState, useRef, MouseEvent } from "react";
@@ -97,7 +99,11 @@ export const About = () => {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section className="relative py-32 px-6">
+    <section className="relative py-32 px-6 overflow-hidden">
+      {/* Background effects */}
+      <FloatingGeometry density="sparse" className="opacity-25" />
+      <FloatingOrbs className="opacity-40" />
+      
       <StarDecoration 
         size="lg" 
         className="absolute top-32 left-[10%] animate-twinkle-slow text-accent" 

@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { StarDecoration } from "@/components/StarDecoration";
-import { LightningEffect } from "@/components/LightningEffect";
 import { ParticleField } from "@/components/ParticleField";
 import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { AnimatedGradientBg } from "@/components/AnimatedGradientBg";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
 import { Github, ArrowDown } from "lucide-react";
 import stableTurboLogo from "@/assets/stable-turbo-logo.png";
 
@@ -16,14 +16,15 @@ export const Hero = () => {
       {/* Floating orbs */}
       <FloatingOrbs className="opacity-70" />
       
-      {/* Particle field */}
-      <ParticleField className="opacity-50" />
+      {/* Floating geometric shapes */}
+      <FloatingGeometry density="dense" className="opacity-60" />
       
-      {/* Lightning Effect */}
-      <LightningEffect className="opacity-40" />
+      {/* Particle field */}
+      <ParticleField className="opacity-40" />
       
       {/* Background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+      
       {/* Decorative stars */}
       <StarDecoration 
         size="lg" 

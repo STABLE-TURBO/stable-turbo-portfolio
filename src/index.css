@@ -284,3 +284,36 @@
 .animate-gradient-shift {
   animation: gradient-shift 20s ease-in-out infinite;
 }
+
+/* Floating geometry animations */
+@keyframes geometry-float {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(20px, -30px);
+  }
+  50% {
+    transform: translate(-10px, 20px);
+  }
+  75% {
+    transform: translate(30px, 10px);
+  }
+}
+
+@keyframes geometry-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-geometry-float {
+  animation: geometry-float ease-in-out infinite;
+}
+
+.animate-geometry-rotate {
+  animation: geometry-rotate linear infinite;
+}

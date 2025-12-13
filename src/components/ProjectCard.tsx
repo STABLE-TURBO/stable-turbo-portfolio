@@ -36,8 +36,9 @@ export const ProjectCard = ({
   isVisible = true,
 }: ProjectCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -48,14 +49,16 @@ export const ProjectCard = ({
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const tiltX = (y - centerY) / 10;
-    const tiltY = (centerX - x) / 10;
+    // Calculate tilt - max 8 degrees
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
     
-    setTilt({ x: tiltX, y: tiltY });
+    setTransform({ rotateX, rotateY });
+    setGlowPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
   const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
+    setTransform({ rotateX: 0, rotateY: 0 });
     setIsHovered(false);
   };
 
@@ -67,36 +70,35 @@ export const ProjectCard = ({
       onMouseLeave={handleMouseLeave}
       className={cn(
         "group relative p-6 rounded-xl bg-card border border-border",
-        "transition-all duration-300 ease-out",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
+        "transition-opacity duration-500 ease-out",
+        isVisible ? "opacity-100" : "opacity-0",
         className
       )}
       style={{ 
         transitionDelay: `${delay}ms`,
-        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg) scale(${isHovered ? 1.02 : 1})`,
+        transform: `perspective(1000px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) scale(${isHovered ? 1.02 : 1})`,
+        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out, opacity 0.5s ease-out',
       }}
     >
-      {/* Glow effect on hover */}
+      {/* Dynamic glow effect following cursor */}
       <div 
         className={cn(
-          "absolute inset-0 rounded-xl transition-opacity duration-300",
+          "absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none",
           isHovered ? "opacity-100" : "opacity-0"
         )}
         style={{
-          background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.15) 0%, transparent 70%)',
-          filter: 'blur(20px)',
-          zIndex: -1,
+          background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, hsl(var(--primary) / 0.25) 0%, transparent 50%)`,
         }}
       />
       
       {/* Border glow */}
       <div 
         className={cn(
-          "absolute inset-0 rounded-xl border-2 transition-opacity duration-300",
+          "absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none",
           isHovered ? "opacity-100 border-primary/50" : "opacity-0 border-transparent"
         )}
         style={{
-          boxShadow: isHovered ? '0 0 30px hsl(var(--primary) / 0.3), inset 0 0 30px hsl(var(--primary) / 0.05)' : 'none',
+          boxShadow: isHovered ? `0 0 30px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.15)` : 'none',
         }}
       />
 
@@ -110,6 +112,7 @@ export const ProjectCard = ({
             target="_blank"
             rel="noopener noreferrer"
             className="p-2 -m-2 hover:bg-primary/10 rounded-lg transition-colors"
+            onClick={(e) => e.stopPropagation()}
           >
             <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
           </a>
@@ -143,6 +146,7 @@ export const ProjectCard = ({
             <Link 
               to={docsUrl}
               className="flex items-center gap-1.5 text-sm text-primary hover:text-accent transition-colors"
+              onClick={(e) => e.stopPropagation()}
             >
               <BookOpen className="w-4 h-4" />
               <span>Docs</span>
