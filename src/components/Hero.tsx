@@ -5,6 +5,7 @@ import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { AnimatedGradientBg } from "@/components/AnimatedGradientBg";
 import { FloatingGeometry } from "@/components/FloatingGeometry";
 import { Github, ArrowDown } from "lucide-react";
+import { trackEvent } from "@/lib/analytics";
 import stableTurboLogo from "@/assets/stable-turbo-logo.png";
 
 export const Hero = () => {
@@ -71,7 +72,7 @@ export const Hero = () => {
             size="lg" 
             asChild
           >
-            <a href="https://github.com/STABLE-TURBO" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/STABLE-TURBO" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("cta_click", { id: "hero_github" })}>
               <Github className="w-5 h-5" />
               View on GitHub
             </a>
@@ -80,7 +81,7 @@ export const Hero = () => {
           <Button 
             variant="heroOutline" 
             size="lg"
-            onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
+            onClick={() => { trackEvent("cta_click", { id: "hero_explore_projects" }); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}
           >
             Explore Projects
             <ArrowDown className="w-5 h-5" />

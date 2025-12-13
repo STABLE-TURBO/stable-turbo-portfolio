@@ -6,6 +6,7 @@ import { ParticleField } from "@/components/ParticleField";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: typeof Github; label: string }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -82,7 +83,7 @@ export const Footer = () => {
         </div>
 
         <Button variant="hero" size="lg" asChild className="group">
-          <a href="https://github.com/STABLE-TURBO" target="_blank" rel="noopener noreferrer">
+          <a href="https://github.com/STABLE-TURBO" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("cta_click", { id: "footer_github_follow" })}>
             <Github className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
             Follow on GitHub
           </a>

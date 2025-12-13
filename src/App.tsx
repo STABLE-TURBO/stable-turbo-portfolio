@@ -2,8 +2,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import { trackPageview } from "@/lib/analytics";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 
@@ -28,6 +29,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <HashRouter>
+        <RouteChangeTracker />
         <Suspense fallback={<div className="min-h-screen bg-background" />}>
           <Routes>
             <Route path="/" element={<Index />} />
@@ -52,3 +54,12 @@ const App = () => (
 );
 
 export default App;
+
+const RouteChangeTracker = () => {
+  const location = useLocation();
+  const path = location.pathname + location.search + location.hash;
+  globalThis.requestAnimationFrame(() => {
+    trackPageview(path, document.referrer);
+  });
+  return null;
+};
