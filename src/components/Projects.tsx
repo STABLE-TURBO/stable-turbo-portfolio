@@ -1,5 +1,7 @@
 import { ProjectCard } from "@/components/ProjectCard";
 import { StarDecoration } from "@/components/StarDecoration";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
+import { ParticleField } from "@/components/ParticleField";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const projects = [
@@ -28,9 +30,11 @@ export const Projects = () => {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section id="projects" className="relative py-32 px-6">
-      {/* Background accent */}
+    <section id="projects" className="relative py-32 px-6 overflow-hidden">
+      {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
+      <FloatingGeometry density="sparse" className="opacity-30" />
+      <ParticleField className="opacity-20" />
       
       <StarDecoration 
         size="sm" 

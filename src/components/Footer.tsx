@@ -1,6 +1,8 @@
 import { Github, Twitter, Mail, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StarDecoration } from "@/components/StarDecoration";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
+import { ParticleField } from "@/components/ParticleField";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -44,8 +46,10 @@ export const Footer = () => {
 
   return (
     <footer className="relative py-20 px-6 border-t border-border overflow-hidden">
-      {/* Background gradient */}
+      {/* Background effects */}
       <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+      <FloatingGeometry density="sparse" className="opacity-20" />
+      <ParticleField className="opacity-15" />
       
       <StarDecoration 
         size="sm" 
