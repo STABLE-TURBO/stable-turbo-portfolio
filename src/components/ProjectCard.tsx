@@ -1,6 +1,5 @@
-import { ExternalLink, Star, GitFork, BookOpen } from "lucide-react";
+import { ExternalLink, Star, GitFork } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Link } from "react-router-dom";
 import { useState, useRef, MouseEvent } from "react";
 
 interface ProjectCardProps {
@@ -10,7 +9,6 @@ interface ProjectCardProps {
   stars: number;
   forks?: number;
   url: string;
-  docsUrl?: string;
   className?: string;
   delay?: number;
   isVisible?: boolean;
@@ -30,7 +28,6 @@ export const ProjectCard = ({
   stars,
   forks,
   url,
-  docsUrl,
   className,
   delay = 0,
   isVisible = true,
@@ -122,35 +119,22 @@ export const ProjectCard = ({
           {description}
         </p>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <span className={cn("w-3 h-3 rounded-full", languageColors[language] || "bg-muted")} />
-              <span>{language}</span>
-            </div>
-            
-            <div className="flex items-center gap-1 group-hover:text-accent transition-colors">
-              <Star className="w-4 h-4" />
-              <span>{stars}</span>
-            </div>
-            
-            {forks !== undefined && forks > 0 && (
-              <div className="flex items-center gap-1">
-                <GitFork className="w-4 h-4" />
-                <span>{forks}</span>
-              </div>
-            )}
+        <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <span className={cn("w-3 h-3 rounded-full", languageColors[language] || "bg-muted")} />
+            <span>{language}</span>
           </div>
-
-          {docsUrl && (
-            <Link 
-              to={docsUrl}
-              className="flex items-center gap-1.5 text-sm text-primary hover:text-accent transition-colors"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <BookOpen className="w-4 h-4" />
-              <span>Docs</span>
-            </Link>
+          
+          <div className="flex items-center gap-1 group-hover:text-accent transition-colors">
+            <Star className="w-4 h-4" />
+            <span>{stars}</span>
+          </div>
+          
+          {forks !== undefined && forks > 0 && (
+            <div className="flex items-center gap-1">
+              <GitFork className="w-4 h-4" />
+              <span>{forks}</span>
+            </div>
           )}
         </div>
       </div>

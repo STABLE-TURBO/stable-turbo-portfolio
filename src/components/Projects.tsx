@@ -6,13 +6,12 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const projects = [
   {
-    name: "Neural",
-    description: "A domain-specific language (DSL) designed for defining, training, debugging, and deploying neural networks. With declarative syntax, cross-framework support, and built-in execution tracing.",
-    language: "HTML",
+    name: "NeuralDBG",
+    description: "A powerful debugger for neural networks. Trace activations, visualize gradients, detect vanishing/exploding gradients, and step through forward/backward passes with an intuitive interface.",
+    language: "Python",
     stars: 17,
     forks: 1,
     url: "https://github.com/STABLE-TURBO/Neural",
-    docsUrl: "/docs/neural",
   },
   {
     name: "Metatron",
@@ -21,7 +20,6 @@ const projects = [
     stars: 5,
     forks: 0,
     url: "https://github.com/STABLE-TURBO/Metatron",
-    docsUrl: "/docs/metatron",
   },
 ];
 
