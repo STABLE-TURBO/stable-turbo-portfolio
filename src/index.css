@@ -317,3 +317,38 @@
 .animate-geometry-rotate {
   animation: geometry-rotate linear infinite;
 }
+
+/* Connection line animations */
+@keyframes connection-pulse {
+  0%, 100% {
+    opacity: 0.2;
+    stroke-width: 1;
+  }
+  50% {
+    opacity: 0.6;
+    stroke-width: 2;
+  }
+}
+
+@keyframes flow-particle {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-connection-pulse {
+  animation: connection-pulse 4s ease-in-out infinite;
+}
+
+.animate-flow-particle {
+  animation: flow-particle 3s ease-in-out infinite;
+}

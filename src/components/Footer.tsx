@@ -77,8 +77,8 @@ export const Footer = () => {
         
         {/* Social Links */}
         <div className="flex flex-wrap justify-center gap-4 mb-10">
-          <SocialLink href="https://github.com/STABLE-TURBO" icon={Github} label="GitHub" />
-          <SocialLink href="https://twitter.com/stableturbo" icon={Twitter} label="Twitter" />
+          <SocialLink href="https://github.com/STABLE-TURBO" icon={Github} label="STABLE-TURBO" />
+          <SocialLink href="https://github.com/Lemniscate-world" icon={Github} label="@Lemniscate-world" />
           <SocialLink href="mailto:contact@stableturbo.dev" icon={Mail} label="Contact" />
         </div>
 
@@ -92,6 +92,9 @@ export const Footer = () => {
         <div className="mt-16 pt-8 border-t border-border">
           <p className="text-muted-foreground text-sm">
             © {new Date().getFullYear()} STABLE TURBO. All projects are open source.
+          </p>
+          <p className="text-muted-foreground/60 text-xs mt-2">
+            Built by <a href="https://github.com/Lemniscate-world" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@Lemniscate-world</a>
           </p>
         </div>
       </div>
