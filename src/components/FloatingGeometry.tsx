@@ -73,10 +73,10 @@ const NeuralNetworkSVG = ({ size, className }: { size: number; className?: strin
     <circle cx="85" cy="35" r="4" fill="hsl(var(--primary) / 0.6)" />
     <circle cx="85" cy="65" r="4" fill="hsl(var(--primary) / 0.6)" />
     {/* Connections */}
-    {[25, 50, 75].map(y1 => [20, 40, 60, 80].map(y2 => (
+    {[25, 50, 75].flatMap(y1 => [20, 40, 60, 80].map(y2 => (
       <line key={`${y1}-${y2}`} x1="15" y1={y1} x2="50" y2={y2} stroke="hsl(var(--primary) / 0.2)" strokeWidth="0.5" />
     )))}
-    {[20, 40, 60, 80].map(y1 => [35, 65].map(y2 => (
+    {[20, 40, 60, 80].flatMap(y1 => [35, 65].map(y2 => (
       <line key={`${y1}-${y2}-out`} x1="50" y1={y1} x2="85" y2={y2} stroke="hsl(var(--accent) / 0.2)" strokeWidth="0.5" />
     )))}
   </svg>
