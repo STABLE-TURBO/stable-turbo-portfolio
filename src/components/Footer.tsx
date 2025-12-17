@@ -1,5 +1,8 @@
-import { Github, Mail, ArrowUpRight } from "lucide-react";
+import { Github, Twitter, Mail, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { StarDecoration } from "@/components/StarDecoration";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
+import { ParticleField } from "@/components/ParticleField";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
@@ -16,14 +19,14 @@ const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: typeof Gi
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "flex items-center gap-2 px-4 py-2 rounded-xl border border-border/50",
+        "flex items-center gap-2 px-4 py-2 rounded-lg border border-border",
         "transition-all duration-300",
-        isHovered && "border-primary/30 bg-primary/5"
+        isHovered && "border-primary/50 bg-primary/5 shadow-[0_0_20px_hsl(var(--primary)/0.2)]"
       )}
     >
       <Icon className={cn(
         "w-5 h-5 transition-all duration-300",
-        isHovered ? "text-primary" : "text-muted-foreground"
+        isHovered ? "text-primary scale-110" : "text-muted-foreground"
       )} />
       <span className={cn(
         "text-sm transition-colors duration-300",
@@ -33,7 +36,7 @@ const SocialLink = ({ href, icon: Icon, label }: { href: string; icon: typeof Gi
       </span>
       <ArrowUpRight className={cn(
         "w-4 h-4 transition-all duration-300",
-        isHovered ? "opacity-100 text-primary" : "opacity-0"
+        isHovered ? "opacity-100 translate-x-0.5 -translate-y-0.5 text-primary" : "opacity-0"
       )} />
     </a>
   );
@@ -43,42 +46,54 @@ export const Footer = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <footer className="relative py-24 px-6 border-t border-border/30">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-primary/30 to-transparent" />
+    <footer className="relative py-20 px-6 border-t border-border overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-t from-primary/5 via-transparent to-transparent" />
+      <FloatingGeometry density="sparse" className="opacity-20" />
+      <ParticleField className="opacity-15" />
+      
+      <StarDecoration 
+        size="sm" 
+        className="absolute top-10 right-[20%] animate-twinkle text-primary" 
+      />
+      <StarDecoration 
+        size="md" 
+        className="absolute bottom-20 left-[15%] animate-twinkle-delayed text-accent" 
+      />
       
       <div 
         ref={ref}
         className={cn(
-          "relative z-10 max-w-4xl mx-auto text-center transition-all duration-700",
+          "relative z-10 max-w-5xl mx-auto text-center transition-all duration-700",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}
       >
-        <span className="inline-block px-3 py-1 rounded-full text-xs font-mono text-primary border border-primary/30 mb-6">
-          004 / CONNECT
-        </span>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl md:text-3xl font-bold mb-4">
           Ready to <span className="text-gradient">contribute</span>?
         </h2>
-        <p className="text-muted-foreground mb-10 max-w-md mx-auto text-lg">
-          Join us in building the future of AI development.
+        <p className="text-muted-foreground mb-8 max-w-md mx-auto">
+          Join us in building the future of AI development. Star our repos, open issues, or submit PRs.
         </p>
         
-        <div className="flex flex-wrap justify-center gap-3 mb-10">
+        {/* Social Links */}
+        <div className="flex flex-wrap justify-center gap-4 mb-10">
           <SocialLink href="https://github.com/STABLE-TURBO" icon={Github} label="STABLE-TURBO" />
           <SocialLink href="https://github.com/Lemniscate-world" icon={Github} label="@Lemniscate-world" />
           <SocialLink href="mailto:contact@stableturbo.dev" icon={Mail} label="Contact" />
         </div>
 
-        <Button variant="hero" size="lg" asChild>
+        <Button variant="hero" size="lg" asChild className="group">
           <a href="https://github.com/STABLE-TURBO" target="_blank" rel="noopener noreferrer" onClick={() => trackEvent("cta_click", { id: "footer_github_follow" })}>
-            <Github className="w-5 h-5" />
+            <Github className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
             Follow on GitHub
           </a>
         </Button>
         
-        <div className="mt-16 pt-8 border-t border-border/20 text-sm text-muted-foreground">
-          <p>© {new Date().getFullYear()} STABLE TURBO. All projects are open source.</p>
-          <p className="text-xs mt-2 opacity-60">
+        <div className="mt-16 pt-8 border-t border-border">
+          <p className="text-muted-foreground text-sm">
+            © {new Date().getFullYear()} STABLE TURBO. All projects are open source.
+          </p>
+          <p className="text-muted-foreground/60 text-xs mt-2">
             Built by <a href="https://github.com/Lemniscate-world" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">@Lemniscate-world</a>
           </p>
         </div>

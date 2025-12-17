@@ -1,4 +1,6 @@
 import { Github, ExternalLink } from "lucide-react";
+import { StarDecoration } from "@/components/StarDecoration";
+import { FloatingGeometry } from "@/components/FloatingGeometry";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState, useRef, MouseEvent } from "react";
@@ -13,7 +15,7 @@ interface TeamMemberProps {
   isVisible: boolean;
 }
 
-const TeamMember = ({ name, pseudo, role, github, delay, isVisible }: TeamMemberProps) => {
+const TeamMember = ({ name, pseudo, role, github, avatar, delay, isVisible }: TeamMemberProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -34,10 +36,10 @@ const TeamMember = ({ name, pseudo, role, github, delay, isVisible }: TeamMember
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "relative p-10 rounded-2xl border border-border/50 overflow-hidden",
+        "relative p-8 rounded-xl bg-card/50 border border-border overflow-hidden text-center",
         "transition-all duration-500 ease-out",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-        isHovered && "border-primary/30 bg-card/50"
+        isHovered && "border-primary/40 scale-[1.02]"
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
@@ -46,52 +48,52 @@ const TeamMember = ({ name, pseudo, role, github, delay, isVisible }: TeamMember
         className="absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none"
         style={{
           opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(350px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.1), transparent 50%)`,
+          background: `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.12), transparent 50%)`,
         }}
       />
 
-      <div className="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-        {/* Avatar */}
-        <div className={cn(
-          "relative w-28 h-28 rounded-full overflow-hidden border-2 transition-all duration-300 shrink-0",
-          isHovered ? "border-primary shadow-[0_0_40px_hsl(var(--primary)/0.3)]" : "border-border"
-        )}>
-          <div className="w-full h-full bg-gradient-to-br from-primary/20 via-accent/20 to-primary/20 flex items-center justify-center">
-            <span className="text-4xl font-black text-primary">
-              {name.charAt(0)}
+      {/* Avatar */}
+      <div className={cn(
+        "relative w-24 h-24 mx-auto mb-6 rounded-full overflow-hidden border-2 transition-all duration-300",
+        isHovered ? "border-primary shadow-[0_0_30px_hsl(var(--primary)/0.4)]" : "border-border"
+      )}>
+        {avatar ? (
+          <img src={avatar} alt={name} className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center">
+            <span className="text-3xl font-bold text-primary">
+              {name.split(' ').map(n => n[0]).join('')}
             </span>
           </div>
-        </div>
-
-        {/* Info */}
-        <div className="text-center md:text-left">
-          <h3 className={cn(
-            "text-2xl font-bold mb-1 transition-colors duration-300",
-            isHovered && "text-primary"
-          )}>
-            {name}
-          </h3>
-          <p className="text-primary/80 font-mono text-sm mb-2">@{pseudo}</p>
-          <p className="text-muted-foreground mb-6">{role}</p>
-
-          {/* GitHub Link */}
-          <a
-            href={github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              "inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border transition-all duration-300 font-medium",
-              isHovered 
-                ? "border-primary bg-primary text-primary-foreground" 
-                : "border-border text-muted-foreground hover:text-foreground hover:border-border/80"
-            )}
-          >
-            <Github className="w-4 h-4" />
-            <span>View Profile</span>
-            <ExternalLink className="w-3 h-3" />
-          </a>
-        </div>
+        )}
       </div>
+
+      {/* Info */}
+      <h3 className={cn(
+        "text-xl font-bold mb-1 transition-colors duration-300",
+        isHovered && "text-primary"
+      )}>
+        {name}
+      </h3>
+      <p className="text-primary font-mono text-sm mb-2">@{pseudo}</p>
+      <p className="text-muted-foreground text-sm mb-6">{role}</p>
+
+      {/* GitHub Link */}
+      <a
+        href={github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(
+          "inline-flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-300",
+          isHovered 
+            ? "border-primary/50 bg-primary/10 text-primary" 
+            : "border-border text-muted-foreground hover:text-foreground"
+        )}
+      >
+        <Github className="w-4 h-4" />
+        <span className="text-sm">GitHub</span>
+        <ExternalLink className="w-3 h-3" />
+      </a>
     </div>
   );
 };
@@ -110,37 +112,49 @@ export const Team = () => {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section id="team" className="relative py-32 px-6">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent" />
+    <section id="team" className="relative py-32 px-6 overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/3 to-transparent" />
+      <FloatingGeometry density="sparse" className="opacity-25" />
       
-      <div className="relative z-10 max-w-4xl mx-auto">
+      <StarDecoration 
+        size="md" 
+        className="absolute top-24 left-[15%] animate-twinkle text-primary" 
+      />
+      <StarDecoration 
+        size="sm" 
+        className="absolute bottom-32 right-[20%] animate-twinkle-delayed text-accent" 
+      />
+      
+      <div className="relative z-10 max-w-5xl mx-auto">
         <div 
           ref={headerRef}
           className={`text-center mb-16 transition-all duration-700 ${
             headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="inline-block px-3 py-1 rounded-full text-xs font-mono text-primary border border-primary/30 mb-6">
-            003 / TEAM
+          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
+            The Team
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            The <span className="text-gradient">Builder</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+            Built by <span className="text-gradient">Builders</span>
           </h2>
-          <p className="text-muted-foreground text-xl max-w-xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             Meet the developer behind STABLE TURBO's open source projects.
           </p>
         </div>
         
         <div ref={cardsRef} className="flex justify-center">
-          {team.map((member, index) => (
-            <TeamMember
-              key={member.pseudo}
-              {...member}
-              delay={index * 150}
-              isVisible={cardsVisible}
-            />
-          ))}
+          <div className="w-full max-w-sm">
+            {team.map((member, index) => (
+              <TeamMember
+                key={member.pseudo}
+                {...member}
+                delay={index * 150}
+                isVisible={cardsVisible}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

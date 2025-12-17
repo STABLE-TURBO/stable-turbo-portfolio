@@ -12,6 +12,15 @@ interface GeometricShape {
   opacity: number;
 }
 
+interface ConnectionLine {
+  id: string;
+  x1: number;
+  y1: number;
+  x2: number;
+  y2: number;
+  delay: number;
+}
+
 const HypersphereSVG = ({ size, className }: { size: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
     <defs>
@@ -51,15 +60,19 @@ const IcosahedronSVG = ({ size, className }: { size: number; className?: string 
 
 const NeuralNetworkSVG = ({ size, className }: { size: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
+    {/* Input layer */}
     <circle cx="15" cy="25" r="4" fill="hsl(var(--primary) / 0.6)" />
     <circle cx="15" cy="50" r="4" fill="hsl(var(--primary) / 0.6)" />
     <circle cx="15" cy="75" r="4" fill="hsl(var(--primary) / 0.6)" />
+    {/* Hidden layer */}
     <circle cx="50" cy="20" r="4" fill="hsl(var(--accent) / 0.6)" />
     <circle cx="50" cy="40" r="4" fill="hsl(var(--accent) / 0.6)" />
     <circle cx="50" cy="60" r="4" fill="hsl(var(--accent) / 0.6)" />
     <circle cx="50" cy="80" r="4" fill="hsl(var(--accent) / 0.6)" />
+    {/* Output layer */}
     <circle cx="85" cy="35" r="4" fill="hsl(var(--primary) / 0.6)" />
     <circle cx="85" cy="65" r="4" fill="hsl(var(--primary) / 0.6)" />
+    {/* Connections */}
     {[25, 50, 75].flatMap(y1 => [20, 40, 60, 80].map(y2 => (
       <line key={`${y1}-${y2}`} x1="15" y1={y1} x2="50" y2={y2} stroke="hsl(var(--primary) / 0.2)" strokeWidth="0.5" />
     )))}
@@ -93,6 +106,7 @@ const CondensateSVG = ({ size, className }: { size: number; className?: string }
 
 const GravitySVG = ({ size, className }: { size: number; className?: string }) => (
   <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
+    {/* Warped grid */}
     {Array.from({ length: 7 }).map((_, i) => {
       const y = 20 + i * 10;
       const curve = Math.sin((i - 3) * 0.5) * 15;
@@ -153,8 +167,78 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
     }));
   }, [count]);
 
+  // Generate connection lines between nearby shapes
+  const connections = useMemo<ConnectionLine[]>(() => {
+    const lines: ConnectionLine[] = [];
+    for (let i = 0; i < shapes.length; i++) {
+      for (let j = i + 1; j < shapes.length; j++) {
+        const dx = shapes[j].x - shapes[i].x;
+        const dy = shapes[j].y - shapes[i].y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        // Only connect shapes within 50% distance
+        if (distance < 50) {
+          lines.push({
+            id: `${i}-${j}`,
+            x1: shapes[i].x,
+            y1: shapes[i].y,
+            x2: shapes[j].x,
+            y2: shapes[j].y,
+            delay: Math.random() * 5,
+          });
+        }
+      }
+    }
+    return lines;
+  }, [shapes]);
+
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+      {/* Animated connection lines */}
+      <svg className="absolute inset-0 w-full h-full">
+        <defs>
+          <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
+          </linearGradient>
+        </defs>
+        {connections.map((line) => (
+          <line
+            key={line.id}
+            x1={`${line.x1}%`}
+            y1={`${line.y1}%`}
+            x2={`${line.x2}%`}
+            y2={`${line.y2}%`}
+            stroke="url(#connectionGrad)"
+            strokeWidth="1"
+            className="animate-connection-pulse"
+            style={{ 
+              animationDelay: `${line.delay}s`,
+              opacity: 0.3,
+            }}
+          />
+        ))}
+        {/* Animated flowing particles along connections */}
+        {connections.slice(0, 4).map((line, idx) => (
+          <circle
+            key={`particle-${line.id}`}
+            r="2"
+            fill="hsl(var(--primary))"
+            className="animate-flow-particle"
+            style={{ 
+              animationDelay: `${idx * 1.5}s`,
+              offsetPath: `path('M ${line.x1}% ${line.y1}% L ${line.x2}% ${line.y2}%')`,
+            }}
+          >
+            <animateMotion
+              dur={`${4 + idx}s`}
+              repeatCount="indefinite"
+              path={`M ${line.x1 * 10} ${line.y1 * 6} L ${line.x2 * 10} ${line.y2 * 6}`}
+            />
+          </circle>
+        ))}
+      </svg>
+
       {shapes.map((shape) => (
         <div
           key={shape.id}
