@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
 import { trackPageview } from "@/lib/analytics";
 import Index from "./pages/Index";
+import BrandAssets from "./pages/BrandAssets";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -18,6 +19,7 @@ const App = () => (
         <RouteChangeTracker />
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/brand" element={<BrandAssets />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>
