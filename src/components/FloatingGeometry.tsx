@@ -12,14 +12,6 @@ interface GeometricShape {
   opacity: number;
 }
 
-interface ConnectionLine {
-  id: string;
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-  delay: number;
-}
 
 const HypersphereSVG = ({ size }: { size: number }) => (
   <svg width={size} height={size} viewBox="0 0 100 100">
@@ -174,45 +166,9 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
     }));
   }, [count]);
 
-  const connections = useMemo<ConnectionLine[]>(() => {
-    const lines: ConnectionLine[] = [];
-    for (let i = 0; i < shapes.length; i++) {
-      for (let j = i + 1; j < shapes.length; j++) {
-        const dx = shapes[j].x - shapes[i].x;
-        const dy = shapes[j].y - shapes[i].y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance < 50) {
-          lines.push({
-            id: `${i}-${j}`,
-            x1: shapes[i].x,
-            y1: shapes[i].y,
-            x2: shapes[j].x,
-            y2: shapes[j].y,
-            delay: Math.random() * 5,
-          });
-        }
-      }
-    }
-    return lines;
-  }, [shapes]);
-
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-      <svg className="absolute inset-0 w-full h-full">
-        {connections.map((line) => (
-          <line
-            key={line.id}
-            x1={`${line.x1}%`}
-            y1={`${line.y1}%`}
-            x2={`${line.x2}%`}
-            y2={`${line.y2}%`}
-            stroke="hsl(217 100% 60% / 0.3)"
-            strokeWidth="1"
-            className="animate-connection-pulse"
-            style={{ animationDelay: `${line.delay}s` }}
-          />
-        ))}
-      </svg>
+
 
       {shapes.map((shape) => (
         <div
