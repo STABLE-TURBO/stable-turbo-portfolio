@@ -4,9 +4,9 @@ import { ParticleField } from "@/components/ParticleField";
 import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { AnimatedGradientBg } from "@/components/AnimatedGradientBg";
 import { FloatingGeometry } from "@/components/FloatingGeometry";
+import { Logo } from "@/components/Logo";
 import { Github, ArrowDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
-import stableTurboLogo from "@/assets/stable-turbo-logo.png";
 
 export const Hero = () => {
   return (
@@ -48,11 +48,7 @@ export const Hero = () => {
       <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
         {/* Logo */}
         <div className="mb-8 animate-float">
-          <img 
-            src={stableTurboLogo} 
-            alt="STABLE TURBO" 
-            className="w-64 md:w-80 lg:w-96 h-auto"
-          />
+          <Logo size="xl" />
         </div>
         
         {/* Tagline */}
