@@ -21,70 +21,80 @@ interface ConnectionLine {
   delay: number;
 }
 
-const HypersphereSVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    <defs>
-      <linearGradient id="sphereGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
-        <stop offset="100%" stopColor="hsl(var(--accent))" stopOpacity="0.2" />
-      </linearGradient>
-    </defs>
-    <circle cx="50" cy="50" r="45" fill="none" stroke="url(#sphereGrad)" strokeWidth="0.5" />
-    <ellipse cx="50" cy="50" rx="45" ry="20" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
-    <ellipse cx="50" cy="50" rx="20" ry="45" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="0.5" />
-    <ellipse cx="50" cy="50" rx="45" ry="35" fill="none" stroke="hsl(var(--primary) / 0.3)" strokeWidth="0.5" transform="rotate(45 50 50)" />
-    <ellipse cx="50" cy="50" rx="45" ry="35" fill="none" stroke="hsl(var(--primary) / 0.3)" strokeWidth="0.5" transform="rotate(-45 50 50)" />
-    <circle cx="50" cy="50" r="30" fill="none" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.5" />
-    <circle cx="50" cy="50" r="15" fill="none" stroke="hsl(var(--accent) / 0.4)" strokeWidth="0.5" />
+const HypersphereSVG = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="45" fill="none" stroke="hsl(217 100% 60% / 0.5)" strokeWidth="0.5" />
+    <ellipse cx="50" cy="50" rx="45" ry="20" fill="none" stroke="hsl(217 100% 60% / 0.4)" strokeWidth="0.5" />
+    <ellipse cx="50" cy="50" rx="20" ry="45" fill="none" stroke="hsl(217 100% 60% / 0.4)" strokeWidth="0.5" />
+    <ellipse cx="50" cy="50" rx="45" ry="35" fill="none" stroke="hsl(217 100% 60% / 0.3)" strokeWidth="0.5" transform="rotate(45 50 50)" />
+    <ellipse cx="50" cy="50" rx="45" ry="35" fill="none" stroke="hsl(217 100% 60% / 0.3)" strokeWidth="0.5" transform="rotate(-45 50 50)" />
+    <circle cx="50" cy="50" r="30" fill="none" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="0.5" />
+    <circle cx="50" cy="50" r="15" fill="none" stroke="hsl(217 100% 70% / 0.4)" strokeWidth="0.5" />
   </svg>
 );
 
-const TorusSVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(var(--primary) / 0.5)" strokeWidth="1" />
-    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(var(--accent) / 0.3)" strokeWidth="1" transform="rotate(60 50 50)" />
-    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" transform="rotate(120 50 50)" />
-    <circle cx="50" cy="50" r="25" fill="none" stroke="hsl(var(--accent) / 0.2)" strokeWidth="0.5" strokeDasharray="3 3" />
+const TorusSVG = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100">
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(217 100% 60% / 0.5)" strokeWidth="1" />
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="1" transform="rotate(60 50 50)" />
+    <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="hsl(217 100% 60% / 0.4)" strokeWidth="1" transform="rotate(120 50 50)" />
+    <circle cx="50" cy="50" r="25" fill="none" stroke="hsl(217 100% 70% / 0.2)" strokeWidth="0.5" strokeDasharray="3 3" />
   </svg>
 );
 
-const IcosahedronSVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    <polygon points="50,10 90,35 90,65 50,90 10,65 10,35" fill="none" stroke="hsl(var(--primary) / 0.5)" strokeWidth="0.8" />
-    <line x1="50" y1="10" x2="50" y2="90" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.5" />
-    <line x1="10" y1="35" x2="90" y2="65" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.5" />
-    <line x1="10" y1="65" x2="90" y2="35" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.5" />
-    <circle cx="50" cy="50" r="3" fill="hsl(var(--primary) / 0.6)" />
+const IcosahedronSVG = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100">
+    <polygon points="50,10 90,35 90,65 50,90 10,65 10,35" fill="none" stroke="hsl(217 100% 60% / 0.5)" strokeWidth="0.8" />
+    <line x1="50" y1="10" x2="50" y2="90" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="0.5" />
+    <line x1="10" y1="35" x2="90" y2="65" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="0.5" />
+    <line x1="10" y1="65" x2="90" y2="35" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="0.5" />
+    <circle cx="50" cy="50" r="3" fill="hsl(217 100% 60% / 0.6)" />
   </svg>
 );
 
-const NeuralNetworkSVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    {/* Input layer */}
-    <circle cx="15" cy="25" r="4" fill="hsl(var(--primary) / 0.6)" />
-    <circle cx="15" cy="50" r="4" fill="hsl(var(--primary) / 0.6)" />
-    <circle cx="15" cy="75" r="4" fill="hsl(var(--primary) / 0.6)" />
-    {/* Hidden layer */}
-    <circle cx="50" cy="20" r="4" fill="hsl(var(--accent) / 0.6)" />
-    <circle cx="50" cy="40" r="4" fill="hsl(var(--accent) / 0.6)" />
-    <circle cx="50" cy="60" r="4" fill="hsl(var(--accent) / 0.6)" />
-    <circle cx="50" cy="80" r="4" fill="hsl(var(--accent) / 0.6)" />
-    {/* Output layer */}
-    <circle cx="85" cy="35" r="4" fill="hsl(var(--primary) / 0.6)" />
-    <circle cx="85" cy="65" r="4" fill="hsl(var(--primary) / 0.6)" />
-    {/* Connections */}
-    {[25, 50, 75].flatMap(y1 => [20, 40, 60, 80].map(y2 => (
-      <line key={`${y1}-${y2}`} x1="15" y1={y1} x2="50" y2={y2} stroke="hsl(var(--primary) / 0.2)" strokeWidth="0.5" />
-    )))}
-    {[20, 40, 60, 80].flatMap(y1 => [35, 65].map(y2 => (
-      <line key={`${y1}-${y2}-out`} x1="50" y1={y1} x2="85" y2={y2} stroke="hsl(var(--accent) / 0.2)" strokeWidth="0.5" />
-    )))}
-  </svg>
-);
+const NeuralNetworkSVG = ({ size }: { size: number }) => {
+  const nodes = [
+    { x: 15, y: 25 }, { x: 15, y: 50 }, { x: 15, y: 75 },
+    { x: 50, y: 20 }, { x: 50, y: 40 }, { x: 50, y: 60 }, { x: 50, y: 80 },
+    { x: 85, y: 35 }, { x: 85, y: 65 }
+  ];
+  
+  const connections: [number, number][] = [
+    [0, 3], [0, 4], [0, 5], [0, 6],
+    [1, 3], [1, 4], [1, 5], [1, 6],
+    [2, 3], [2, 4], [2, 5], [2, 6],
+    [3, 7], [3, 8], [4, 7], [4, 8], [5, 7], [5, 8], [6, 7], [6, 8]
+  ];
 
-const CondensateSVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    {Array.from({ length: 12 }).map((_, i) => {
+  return (
+    <svg width={size} height={size} viewBox="0 0 100 100">
+      {connections.map(([from, to], idx) => (
+        <line
+          key={idx}
+          x1={nodes[from].x}
+          y1={nodes[from].y}
+          x2={nodes[to].x}
+          y2={nodes[to].y}
+          stroke="hsl(217 100% 60% / 0.2)"
+          strokeWidth="0.5"
+        />
+      ))}
+      {nodes.map((node, idx) => (
+        <circle
+          key={idx}
+          cx={node.x}
+          cy={node.y}
+          r="4"
+          fill={idx < 3 || idx > 6 ? "hsl(217 100% 60% / 0.6)" : "hsl(217 100% 70% / 0.6)"}
+        />
+      ))}
+    </svg>
+  );
+};
+
+const CondensateSVG = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100">
+    {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => {
       const angle = (i / 12) * Math.PI * 2;
       const r = 30 + Math.sin(i * 2) * 10;
       return (
@@ -93,21 +103,18 @@ const CondensateSVG = ({ size, className }: { size: number; className?: string }
           cx={50 + Math.cos(angle) * r}
           cy={50 + Math.sin(angle) * r}
           r={3 + Math.sin(i) * 2}
-          fill="hsl(var(--primary) / 0.4)"
-          className="animate-pulse"
-          style={{ animationDelay: `${i * 100}ms` }}
+          fill="hsl(217 100% 60% / 0.4)"
         />
       );
     })}
-    <circle cx="50" cy="50" r="15" fill="none" stroke="hsl(var(--accent) / 0.3)" strokeWidth="0.5" strokeDasharray="2 2" />
-    <circle cx="50" cy="50" r="5" fill="hsl(var(--primary) / 0.6)" />
+    <circle cx="50" cy="50" r="15" fill="none" stroke="hsl(217 100% 70% / 0.3)" strokeWidth="0.5" strokeDasharray="2 2" />
+    <circle cx="50" cy="50" r="5" fill="hsl(217 100% 60% / 0.6)" />
   </svg>
 );
 
-const GravitySVG = ({ size, className }: { size: number; className?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 100 100" className={className}>
-    {/* Warped grid */}
-    {Array.from({ length: 7 }).map((_, i) => {
+const GravitySVG = ({ size }: { size: number }) => (
+  <svg width={size} height={size} viewBox="0 0 100 100">
+    {[0, 1, 2, 3, 4, 5, 6].map((i) => {
       const y = 20 + i * 10;
       const curve = Math.sin((i - 3) * 0.5) * 15;
       return (
@@ -115,12 +122,12 @@ const GravitySVG = ({ size, className }: { size: number; className?: string }) =
           key={`h-${i}`}
           d={`M 10 ${y} Q 50 ${y + curve} 90 ${y}`}
           fill="none"
-          stroke="hsl(var(--primary) / 0.3)"
+          stroke="hsl(217 100% 60% / 0.3)"
           strokeWidth="0.5"
         />
       );
     })}
-    {Array.from({ length: 7 }).map((_, i) => {
+    {[0, 1, 2, 3, 4, 5, 6].map((i) => {
       const x = 20 + i * 10;
       const curve = Math.sin((i - 3) * 0.5) * 15;
       return (
@@ -128,24 +135,24 @@ const GravitySVG = ({ size, className }: { size: number; className?: string }) =
           key={`v-${i}`}
           d={`M ${x} 10 Q ${x + curve} 50 ${x} 90`}
           fill="none"
-          stroke="hsl(var(--accent) / 0.3)"
+          stroke="hsl(217 100% 70% / 0.3)"
           strokeWidth="0.5"
         />
       );
     })}
-    <circle cx="50" cy="50" r="8" fill="hsl(var(--primary) / 0.5)" />
-    <circle cx="50" cy="50" r="12" fill="none" stroke="hsl(var(--primary) / 0.3)" strokeWidth="0.5" />
+    <circle cx="50" cy="50" r="8" fill="hsl(217 100% 60% / 0.5)" />
+    <circle cx="50" cy="50" r="12" fill="none" stroke="hsl(217 100% 60% / 0.3)" strokeWidth="0.5" />
   </svg>
 );
 
-const ShapeComponent = ({ type, size, className }: { type: GeometricShape['type']; size: number; className?: string }) => {
+const ShapeComponent = ({ type, size }: { type: GeometricShape['type']; size: number }) => {
   switch (type) {
-    case 'hypersphere': return <HypersphereSVG size={size} className={className} />;
-    case 'torus': return <TorusSVG size={size} className={className} />;
-    case 'icosahedron': return <IcosahedronSVG size={size} className={className} />;
-    case 'neural': return <NeuralNetworkSVG size={size} className={className} />;
-    case 'condensate': return <CondensateSVG size={size} className={className} />;
-    case 'gravity': return <GravitySVG size={size} className={className} />;
+    case 'hypersphere': return <HypersphereSVG size={size} />;
+    case 'torus': return <TorusSVG size={size} />;
+    case 'icosahedron': return <IcosahedronSVG size={size} />;
+    case 'neural': return <NeuralNetworkSVG size={size} />;
+    case 'condensate': return <CondensateSVG size={size} />;
+    case 'gravity': return <GravitySVG size={size} />;
   }
 };
 
@@ -167,7 +174,6 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
     }));
   }, [count]);
 
-  // Generate connection lines between nearby shapes
   const connections = useMemo<ConnectionLine[]>(() => {
     const lines: ConnectionLine[] = [];
     for (let i = 0; i < shapes.length; i++) {
@@ -175,7 +181,6 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
         const dx = shapes[j].x - shapes[i].x;
         const dy = shapes[j].y - shapes[i].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
-        // Only connect shapes within 50% distance
         if (distance < 50) {
           lines.push({
             id: `${i}-${j}`,
@@ -193,15 +198,7 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
 
   return (
     <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-      {/* Animated connection lines */}
       <svg className="absolute inset-0 w-full h-full">
-        <defs>
-          <linearGradient id="connectionGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="hsl(var(--accent))" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.4" />
-          </linearGradient>
-        </defs>
         {connections.map((line) => (
           <line
             key={line.id}
@@ -209,33 +206,11 @@ export const FloatingGeometry = ({ className = "", density = 'normal' }: { class
             y1={`${line.y1}%`}
             x2={`${line.x2}%`}
             y2={`${line.y2}%`}
-            stroke="url(#connectionGrad)"
+            stroke="hsl(217 100% 60% / 0.3)"
             strokeWidth="1"
             className="animate-connection-pulse"
-            style={{ 
-              animationDelay: `${line.delay}s`,
-              opacity: 0.3,
-            }}
+            style={{ animationDelay: `${line.delay}s` }}
           />
-        ))}
-        {/* Animated flowing particles along connections */}
-        {connections.slice(0, 4).map((line, idx) => (
-          <circle
-            key={`particle-${line.id}`}
-            r="2"
-            fill="hsl(var(--primary))"
-            className="animate-flow-particle"
-            style={{ 
-              animationDelay: `${idx * 1.5}s`,
-              offsetPath: `path('M ${line.x1}% ${line.y1}% L ${line.x2}% ${line.y2}%')`,
-            }}
-          >
-            <animateMotion
-              dur={`${4 + idx}s`}
-              repeatCount="indefinite"
-              path={`M ${line.x1 * 10} ${line.y1 * 6} L ${line.x2 * 10} ${line.y2 * 6}`}
-            />
-          </circle>
         ))}
       </svg>
 
