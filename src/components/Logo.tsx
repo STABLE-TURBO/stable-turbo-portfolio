@@ -82,7 +82,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
         
         {/* TURBO text */}
         <text
-          x="195"
+          x="210"
           y="75"
           fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
           fontSize="48"
@@ -110,7 +110,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
         
         {/* Tagline */}
         <text
-          x="200"
+          x="210"
           y="105"
           fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
           fontSize="12"
@@ -119,7 +119,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
           textAnchor="middle"
           letterSpacing="6"
         >
-          OPEN SOURCE AI TOOLS
+          OPEN SOURCE INNOVATION
         </text>
       </svg>
     </div>

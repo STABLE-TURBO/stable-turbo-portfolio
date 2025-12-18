@@ -5,6 +5,7 @@ import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { AnimatedGradientBg } from "@/components/AnimatedGradientBg";
 import { FloatingGeometry } from "@/components/FloatingGeometry";
 import { Logo } from "@/components/Logo";
+import { GitHubStats } from "@/components/GitHubStats";
 import { Github, ArrowDown } from "lucide-react";
 import { trackEvent } from "@/lib/analytics";
 
@@ -47,19 +48,23 @@ export const Hero = () => {
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center text-center max-w-4xl mx-auto">
         {/* Logo */}
-        <div className="mb-8 animate-float">
+        <div className="mb-6 animate-float">
           <Logo size="xl" />
+        </div>
+        
+        {/* GitHub Stats */}
+        <div className="mb-8 opacity-0 animate-fade-in-up animation-delay-200">
+          <GitHubStats />
         </div>
         
         {/* Tagline */}
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6 opacity-0 animate-fade-in-up animation-delay-200">
-          Building the <span className="text-gradient">future</span> of AI development
+          Building the <span className="text-gradient">future</span> of open-source innovation
         </h1>
         
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 opacity-0 animate-fade-in-up animation-delay-400">
-          Open-source tools and frameworks that make neural network development 
-          accessible, reliable, and blazingly fast.
-        </p>
+          Tools and frameworks that make development 
+          accessible, reliable, and blazingly fast.</p>
         
         {/* CTAs */}
         <div className="flex flex-col sm:flex-row gap-4 opacity-0 animate-fade-in-up animation-delay-600">
