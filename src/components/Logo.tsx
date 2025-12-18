@@ -75,31 +75,20 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
           fontSize="48"
           fontWeight="700"
           fill="hsl(0 0% 98%)"
-          letterSpacing="4"
+          letterSpacing="2"
         >
           STABLE
         </text>
         
-        {/* Hyphen with energy effect */}
-        <rect
-          x="195"
-          y="55"
-          width="20"
-          height="4"
-          fill="url(#turboGradient)"
-          filter="url(#glow)"
-          rx="2"
-        />
-        
         {/* TURBO text */}
         <text
-          x="225"
+          x="195"
           y="75"
           fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
           fontSize="48"
           fontWeight="700"
           fill="url(#turboGradient)"
-          letterSpacing="4"
+          letterSpacing="2"
           filter="url(#glow)"
         >
           TURBO
