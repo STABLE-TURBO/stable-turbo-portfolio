@@ -8,39 +8,73 @@ const logos = [
     description: "Complete logo with swoosh, tagline and effects",
     file: "/logos/stable-turbo-full.svg",
     preview: "/logos/stable-turbo-full.svg",
-    bgClass: "bg-black"
+    bgClass: "bg-background",
+    png: { width: 2400, height: 720, filename: "stable-turbo-full.png" },
   },
   {
     name: "Icon / Avatar",
     description: "Square icon for profile pictures and favicons",
     file: "/logos/stable-turbo-icon.svg",
     preview: "/logos/stable-turbo-icon.svg",
-    bgClass: "bg-black"
+    bgClass: "bg-background",
+    png: { width: 1024, height: 1024, filename: "stable-turbo-icon.png" },
   },
   {
     name: "Wordmark (Gradient)",
     description: "Text only with blue gradient on TURBO",
     file: "/logos/stable-turbo-wordmark.svg",
     preview: "/logos/stable-turbo-wordmark.svg",
-    bgClass: "bg-black"
+    bgClass: "bg-background",
+    png: { width: 2400, height: 360, filename: "stable-turbo-wordmark.png" },
   },
   {
     name: "Wordmark (White)",
     description: "All white version for dark backgrounds",
     file: "/logos/stable-turbo-white.svg",
     preview: "/logos/stable-turbo-white.svg",
-    bgClass: "bg-black"
-  }
+    bgClass: "bg-background",
+    png: { width: 2400, height: 360, filename: "stable-turbo-white.png" },
+  },
 ];
 
 const BrandAssets = () => {
-  const handleDownload = (url: string, filename: string) => {
-    const link = document.createElement('a');
+  const downloadFile = (url: string, filename: string) => {
+    const link = document.createElement("a");
     link.href = url;
     link.download = filename;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const downloadPngFromSvg = async (svgUrl: string, filename: string, width: number, height: number) => {
+    const res = await fetch(svgUrl);
+    const svgText = await res.text();
+
+    const svgBlob = new Blob([svgText], { type: "image/svg+xml;charset=utf-8" });
+    const svgObjectUrl = URL.createObjectURL(svgBlob);
+
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) return;
+
+      ctx.clearRect(0, 0, width, height);
+      ctx.drawImage(img, 0, 0, width, height);
+      URL.revokeObjectURL(svgObjectUrl);
+
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const pngUrl = URL.createObjectURL(blob);
+        downloadFile(pngUrl, filename);
+        setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
+      }, "image/png");
+    };
+
+    img.src = svgObjectUrl;
   };
 
   return (
@@ -74,15 +108,26 @@ const BrandAssets = () => {
               <div className="p-6">
                 <h3 className="text-lg font-semibold mb-1">{logo.name}</h3>
                 <p className="text-muted-foreground text-sm mb-4">{logo.description}</p>
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => handleDownload(logo.file, logo.file.split('/').pop() || 'logo.svg')}
-                  className="gap-2"
-                >
-                  <Download className="w-4 h-4" />
-                  Download SVG
-                </Button>
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => downloadFile(logo.file, logo.file.split("/").pop() || "logo.svg")}
+                    className="gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download SVG
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    size="sm"
+                    onClick={() => void downloadPngFromSvg(logo.file, logo.png.filename, logo.png.width, logo.png.height)}
+                    className="gap-2"
+                  >
+                    <Download className="w-4 h-4" />
+                    Download PNG
+                  </Button>
+                </div>
               </div>
             </div>
           ))}

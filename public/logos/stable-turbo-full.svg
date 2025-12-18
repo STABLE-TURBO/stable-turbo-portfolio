@@ -25,7 +25,7 @@
   <rect width="400" height="120" fill="#000000"/>
   
   <!-- Turbo swoosh -->
-  <path d="M 30 80 Q 100 20, 200 60 T 380 50" fill="none" stroke="url(#turboGradient)" stroke-width="3" stroke-linecap="round" filter="url(#strongGlow)" opacity="0.8"/>
+  <path d="M 165 82 Q 230 28, 300 60 T 380 52" fill="none" stroke="url(#turboGradient)" stroke-width="3" stroke-linecap="round" filter="url(#strongGlow)" opacity="0.8"/>
   
   <!-- Orbital ring -->
   <ellipse cx="38" cy="60" rx="28" ry="12" fill="none" stroke="#4d94ff" stroke-width="1.5" transform="rotate(-20 38 60)" filter="url(#glow)" opacity="0.6"/>

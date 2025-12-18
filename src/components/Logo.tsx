@@ -43,7 +43,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
         
         {/* Turbo swoosh behind text */}
         <path
-          d="M 30 80 Q 100 20, 200 60 T 380 50"
+          d="M 165 82 Q 230 28, 300 60 T 380 52"
           fill="none"
           stroke="url(#turboGradient)"
           strokeWidth="3"
