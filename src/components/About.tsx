@@ -1,7 +1,4 @@
 import { Zap, Shield, Users } from "lucide-react";
-import { StarDecoration } from "@/components/StarDecoration";
-import { FloatingGeometry } from "@/components/FloatingGeometry";
-import { FloatingOrbs } from "@/components/FloatingOrbs";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useState, useRef, MouseEvent } from "react";
@@ -36,35 +33,32 @@ const ValueCard = ({ icon: Icon, title, description, delay, isVisible }: ValueCa
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "relative text-center p-8 rounded-xl bg-card/50 border border-border overflow-hidden",
-        "transition-all duration-500 ease-out",
+        "relative text-center p-8 rounded-lg bg-card/60 border border-border/60 overflow-hidden",
+        "transition-all duration-400 ease-out",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8",
-        isHovered && "border-primary/40 scale-[1.02]"
+        isHovered && "border-primary/30"
       )}
       style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Spotlight effect */}
+      {/* Subtle spotlight effect */}
       <div
         className="absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none"
         style={{
           opacity: isHovered ? 1 : 0,
-          background: `radial-gradient(300px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.12), transparent 50%)`,
+          background: `radial-gradient(250px circle at ${mousePos.x}px ${mousePos.y}px, hsl(var(--primary) / 0.06), transparent 50%)`,
         }}
       />
 
-      {/* Icon with glow */}
+      {/* Icon */}
       <div className={cn(
-        "relative inline-flex items-center justify-center w-14 h-14 rounded-xl bg-primary/10 text-primary mb-6 transition-all duration-300",
-        isHovered && "bg-primary/20 shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
+        "relative inline-flex items-center justify-center w-12 h-12 rounded-lg bg-primary/10 text-primary mb-5 transition-colors duration-300",
+        isHovered && "bg-primary/15"
       )}>
-        <Icon className={cn(
-          "w-7 h-7 transition-transform duration-300",
-          isHovered && "scale-110"
-        )} />
+        <Icon className="w-6 h-6" />
       </div>
 
       <h3 className={cn(
-        "text-xl font-bold mb-3 transition-colors duration-300",
+        "text-lg font-semibold mb-3 transition-colors duration-300",
         isHovered && "text-primary"
       )}>
         {title}
@@ -85,7 +79,7 @@ const values = [
   {
     icon: Shield,
     title: "Stability",
-    description: "Reliable and well-tested. Our name is a promise - stable systems you can depend on.",
+    description: "Reliable and well-tested. Our name is a promise—stable systems you can depend on.",
   },
   {
     icon: Users,
@@ -99,36 +93,30 @@ export const About = () => {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section className="relative py-32 px-6 overflow-hidden">
-      {/* Background effects */}
-      <FloatingGeometry density="sparse" className="opacity-25" />
-      <FloatingOrbs className="opacity-40" />
+    <section className="relative py-24 px-6">
+      {/* Subtle divider */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       
-      <StarDecoration 
-        size="lg" 
-        className="absolute top-32 left-[10%] animate-twinkle-slow text-accent" 
-      />
-      
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div 
           ref={headerRef}
-          className={`text-center mb-16 transition-all duration-700 ${
+          className={`text-center mb-14 transition-all duration-700 ${
             headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
+          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-3 block">
             Our Mission
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold mb-5">
             Making AI Development <span className="text-gradient">Accessible</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             We believe powerful AI tools should be available to everyone. 
             Our open-source projects aim to democratize neural network development.
           </p>
         </div>
         
-        <div ref={cardsRef} className="grid md:grid-cols-3 gap-8">
+        <div ref={cardsRef} className="grid md:grid-cols-3 gap-6">
           {values.map((value, index) => (
             <ValueCard
               key={value.title}
