@@ -16,9 +16,9 @@ interface ProjectCardProps {
 
 const languageColors: Record<string, string> = {
   HTML: "bg-orange-500",
-  JavaScript: "bg-yellow-400",
+  JavaScript: "bg-amber-400",
   TypeScript: "bg-blue-500",
-  Python: "bg-green-500",
+  Python: "bg-emerald-500",
 };
 
 export const ProjectCard = ({
@@ -33,30 +33,15 @@ export const ProjectCard = ({
   isVisible = true,
 }: ProjectCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [transform, setTransform] = useState({ rotateX: 0, rotateY: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const [glowPos, setGlowPos] = useState({ x: 50, y: 50 });
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
-    
     const rect = cardRef.current.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    // Calculate tilt - max 8 degrees
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
-    
-    setTransform({ rotateX, rotateY });
-    setGlowPos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
-  };
-
-  const handleMouseLeave = () => {
-    setTransform({ rotateX: 0, rotateY: 0 });
-    setIsHovered(false);
+    setMousePos({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
   };
 
   return (
@@ -64,44 +49,30 @@ export const ProjectCard = ({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
+      onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "group relative p-6 rounded-xl bg-card border border-border",
-        "transition-opacity duration-500 ease-out",
+        "group relative p-6 rounded-lg bg-card/70 border border-border/60",
+        "transition-all duration-400 ease-out",
         isVisible ? "opacity-100" : "opacity-0",
+        isHovered && "border-primary/30",
         className
       )}
-      style={{ 
-        transitionDelay: `${delay}ms`,
-        transform: `perspective(1000px) rotateX(${transform.rotateX}deg) rotateY(${transform.rotateY}deg) scale(${isHovered ? 1.02 : 1})`,
-        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.3s ease-out, opacity 0.5s ease-out',
-      }}
+      style={{ transitionDelay: `${delay}ms` }}
     >
-      {/* Dynamic glow effect following cursor */}
+      {/* Subtle glow effect */}
       <div 
         className={cn(
-          "absolute inset-0 rounded-xl transition-opacity duration-300 pointer-events-none",
+          "absolute inset-0 rounded-lg transition-opacity duration-300 pointer-events-none",
           isHovered ? "opacity-100" : "opacity-0"
         )}
         style={{
-          background: `radial-gradient(circle at ${glowPos.x}% ${glowPos.y}%, hsl(var(--primary) / 0.25) 0%, transparent 50%)`,
-        }}
-      />
-      
-      {/* Border glow */}
-      <div 
-        className={cn(
-          "absolute inset-0 rounded-xl border-2 transition-all duration-300 pointer-events-none",
-          isHovered ? "opacity-100 border-primary/50" : "opacity-0 border-transparent"
-        )}
-        style={{
-          boxShadow: isHovered ? `0 0 30px hsl(var(--primary) / 0.3), 0 0 60px hsl(var(--primary) / 0.15)` : 'none',
+          background: `radial-gradient(circle at ${mousePos.x}% ${mousePos.y}%, hsl(var(--primary) / 0.08) 0%, transparent 50%)`,
         }}
       />
 
       <div className="relative z-10">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+          <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors duration-300">
             {name}
           </h3>
           <a 
@@ -111,21 +82,21 @@ export const ProjectCard = ({
             className="p-2 -m-2 hover:bg-primary/10 rounded-lg transition-colors"
             onClick={(e) => e.stopPropagation()}
           >
-            <ExternalLink className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+            <ExternalLink className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
           </a>
         </div>
 
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6 line-clamp-3">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-5 line-clamp-3">
           {description}
         </p>
 
         <div className="flex items-center gap-4 text-sm text-muted-foreground">
           <div className="flex items-center gap-2">
-            <span className={cn("w-3 h-3 rounded-full", languageColors[language] || "bg-muted")} />
+            <span className={cn("w-2.5 h-2.5 rounded-full", languageColors[language] || "bg-muted")} />
             <span>{language}</span>
           </div>
           
-          <div className="flex items-center gap-1 group-hover:text-accent transition-colors">
+          <div className="flex items-center gap-1 group-hover:text-primary transition-colors">
             <Star className="w-4 h-4" />
             <span>{stars}</span>
           </div>

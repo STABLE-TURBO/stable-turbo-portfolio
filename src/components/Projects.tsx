@@ -1,7 +1,4 @@
 import { ProjectCard } from "@/components/ProjectCard";
-import { StarDecoration } from "@/components/StarDecoration";
-import { FloatingGeometry } from "@/components/FloatingGeometry";
-import { ParticleField } from "@/components/ParticleField";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const projects = [
@@ -28,31 +25,24 @@ export const Projects = () => {
   const { ref: cardsRef, isVisible: cardsVisible } = useScrollAnimation({ threshold: 0.1 });
 
   return (
-    <section id="projects" className="relative py-32 px-6 overflow-hidden">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
-      <FloatingGeometry density="sparse" className="opacity-30" />
-      <ParticleField className="opacity-20" />
+    <section id="projects" className="relative py-24 px-6">
+      {/* Subtle divider */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       
-      <StarDecoration 
-        size="sm" 
-        className="absolute top-20 right-[25%] animate-twinkle text-primary" 
-      />
-      
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-4xl mx-auto">
         <div 
           ref={headerRef}
-          className={`text-center mb-16 transition-all duration-700 ${
+          className={`text-center mb-14 transition-all duration-700 ${
             headerVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}
         >
-          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-4 block">
+          <span className="text-primary font-mono text-sm tracking-wider uppercase mb-3 block">
             Open Source
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-display font-semibold mb-5">
             Featured Projects
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
             Tools designed to accelerate AI development and make neural networks 
             more accessible to developers everywhere.
           </p>
