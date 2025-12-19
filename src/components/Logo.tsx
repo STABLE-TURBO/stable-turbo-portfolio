@@ -5,35 +5,54 @@ interface LogoProps {
 
 export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
   const sizeClasses = {
-    sm: 'w-32',
-    md: 'w-48',
-    lg: 'w-64 md:w-80',
-    xl: 'w-80 md:w-96 lg:w-[28rem]'
+    sm: 'w-40',
+    md: 'w-56',
+    lg: 'w-72 md:w-96',
+    xl: 'w-96 md:w-[30rem] lg:w-[36rem]'
   };
 
   return (
     <div className={`${sizeClasses[size]} ${className}`}>
-      <svg viewBox="0 0 400 120" className="w-full h-auto">
+      <svg viewBox="0 0 480 100" className="w-full h-auto">
         <defs>
-          {/* Gradient for the turbo swoosh */}
-          <linearGradient id="turboGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(217 100% 50%)" />
-            <stop offset="50%" stopColor="hsl(217 100% 65%)" />
-            <stop offset="100%" stopColor="hsl(200 100% 60%)" />
+          {/* Vibrant cyan-to-purple gradient */}
+          <linearGradient id="brandGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="hsl(185 100% 50%)" />
+            <stop offset="50%" stopColor="hsl(220 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(270 100% 65%)" />
+          </linearGradient>
+          
+          {/* Animated gradient for TURBO */}
+          <linearGradient id="turboAnimated" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="hsl(185 100% 55%)">
+              <animate attributeName="stop-color" 
+                values="hsl(185 100% 55%); hsl(220 100% 65%); hsl(270 100% 70%); hsl(185 100% 55%)" 
+                dur="4s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="50%" stopColor="hsl(220 100% 60%)">
+              <animate attributeName="stop-color" 
+                values="hsl(220 100% 60%); hsl(270 100% 65%); hsl(185 100% 55%); hsl(220 100% 60%)" 
+                dur="4s" repeatCount="indefinite" />
+            </stop>
+            <stop offset="100%" stopColor="hsl(270 100% 70%)">
+              <animate attributeName="stop-color" 
+                values="hsl(270 100% 70%); hsl(185 100% 55%); hsl(220 100% 60%); hsl(270 100% 70%)" 
+                dur="4s" repeatCount="indefinite" />
+            </stop>
           </linearGradient>
           
           {/* Glow filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
             </feMerge>
           </filter>
           
-          {/* Stronger glow for accent elements */}
-          <filter id="strongGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+          {/* Strong glow for accent elements */}
+          <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
             <feMerge>
               <feMergeNode in="coloredBlur"/>
               <feMergeNode in="SourceGraphic"/>
@@ -41,83 +60,93 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
           </filter>
         </defs>
         
-        {/* Turbo swoosh behind text */}
+        {/* Dynamic swoosh arc */}
         <path
-          d="M 165 82 Q 230 28, 300 60 T 380 52"
+          d="M 200 70 Q 280 15, 360 45 T 460 35"
           fill="none"
-          stroke="url(#turboGradient)"
-          strokeWidth="3"
+          stroke="url(#turboAnimated)"
+          strokeWidth="2.5"
           strokeLinecap="round"
           filter="url(#strongGlow)"
-          opacity="0.8"
-          className="animate-pulse"
+          opacity="0.9"
+        />
+        
+        {/* Secondary swoosh */}
+        <path
+          d="M 220 75 Q 290 25, 370 50 T 455 42"
+          fill="none"
+          stroke="url(#brandGradient)"
+          strokeWidth="1"
+          strokeLinecap="round"
+          opacity="0.4"
         />
         
         {/* Orbital ring around S */}
         <ellipse
-          cx="38"
-          cy="60"
-          rx="28"
+          cx="42"
+          cy="50"
+          rx="32"
           ry="12"
           fill="none"
-          stroke="hsl(217 100% 60%)"
+          stroke="hsl(185 100% 50%)"
           strokeWidth="1.5"
-          transform="rotate(-20 38 60)"
+          transform="rotate(-18 42 50)"
           filter="url(#glow)"
-          opacity="0.6"
+          opacity="0.7"
         />
         
         {/* STABLE text */}
         <text
           x="20"
-          y="75"
-          fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
-          fontSize="48"
+          y="62"
+          fontFamily="'Sora', 'Outfit', system-ui, sans-serif"
+          fontSize="52"
           fontWeight="700"
           fill="hsl(0 0% 98%)"
-          letterSpacing="2"
+          letterSpacing="3"
         >
           STABLE
         </text>
         
-        {/* TURBO text */}
+        {/* TURBO text with animated gradient */}
         <text
-          x="230"
-          y="75"
-          fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
-          fontSize="48"
-          fontWeight="700"
-          fill="url(#turboGradient)"
-          letterSpacing="2"
+          x="255"
+          y="62"
+          fontFamily="'Sora', 'Outfit', system-ui, sans-serif"
+          fontSize="52"
+          fontWeight="800"
+          fill="url(#turboAnimated)"
+          letterSpacing="3"
           filter="url(#glow)"
         >
           TURBO
         </text>
         
-        {/* Speed lines */}
-        <g opacity="0.5" filter="url(#glow)">
-          <line x1="350" y1="40" x2="390" y2="35" stroke="hsl(217 100% 60%)" strokeWidth="2" strokeLinecap="round" />
-          <line x1="355" y1="50" x2="395" y2="48" stroke="hsl(217 100% 65%)" strokeWidth="1.5" strokeLinecap="round" />
-          <line x1="352" y1="60" x2="388" y2="60" stroke="hsl(200 100% 60%)" strokeWidth="1" strokeLinecap="round" />
+        {/* Speed accent lines */}
+        <g opacity="0.6" filter="url(#glow)">
+          <line x1="420" y1="28" x2="465" y2="22" stroke="hsl(185 100% 55%)" strokeWidth="2" strokeLinecap="round" />
+          <line x1="425" y1="38" x2="460" y2="35" stroke="hsl(220 100% 60%)" strokeWidth="1.5" strokeLinecap="round" />
+          <line x1="422" y1="48" x2="455" y2="47" stroke="hsl(270 100% 65%)" strokeWidth="1" strokeLinecap="round" />
         </g>
         
         {/* Particle dots */}
         <g filter="url(#glow)">
-          <circle cx="15" cy="40" r="2" fill="hsl(217 100% 60%)" opacity="0.7" />
-          <circle cx="380" cy="75" r="2.5" fill="hsl(200 100% 60%)" opacity="0.6" />
-          <circle cx="200" cy="25" r="1.5" fill="hsl(217 100% 70%)" opacity="0.5" />
+          <circle cx="12" cy="35" r="2" fill="hsl(185 100% 55%)" opacity="0.8" />
+          <circle cx="468" cy="60" r="2.5" fill="hsl(270 100% 65%)" opacity="0.7" />
+          <circle cx="240" cy="18" r="1.5" fill="hsl(220 100% 60%)" opacity="0.6" />
+          <circle cx="380" cy="75" r="1.5" fill="hsl(185 100% 50%)" opacity="0.5" />
         </g>
         
         {/* Tagline */}
         <text
-          x="210"
-          y="105"
-          fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
-          fontSize="12"
-          fontWeight="400"
-          fill="hsl(0 0% 70%)"
+          x="240"
+          y="92"
+          fontFamily="'Outfit', system-ui, sans-serif"
+          fontSize="11"
+          fontWeight="500"
+          fill="hsl(0 0% 60%)"
           textAnchor="middle"
-          letterSpacing="6"
+          letterSpacing="5"
         >
           OPEN SOURCE INNOVATION
         </text>

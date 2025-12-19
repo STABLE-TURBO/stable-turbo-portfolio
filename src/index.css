@@ -1,54 +1,61 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 0%;
-    --foreground: 0 0% 100%;
+    /* Deep space black background */
+    --background: 240 20% 3%;
+    --foreground: 0 0% 98%;
 
-    --card: 220 15% 6%;
-    --card-foreground: 0 0% 100%;
+    /* Cards with subtle warmth */
+    --card: 240 15% 7%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 220 15% 6%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 240 15% 7%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 217 100% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Electric cyan primary */
+    --primary: 185 100% 50%;
+    --primary-foreground: 240 20% 3%;
 
-    --secondary: 220 15% 10%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 15% 12%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 220 15% 15%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 240 10% 18%;
+    --muted-foreground: 240 5% 55%;
 
-    --accent: 217 100% 70%;
-    --accent-foreground: 0 0% 0%;
+    /* Vivid purple accent */
+    --accent: 270 100% 65%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 15%;
-    --input: 220 15% 15%;
-    --ring: 217 100% 60%;
+    --border: 240 10% 16%;
+    --input: 240 10% 16%;
+    --ring: 185 100% 50%;
 
-    --radius: 0.75rem;
+    --radius: 0.875rem;
 
-    /* Custom tokens */
-    --glow-primary: 217 100% 60%;
-    --glow-secondary: 217 100% 70%;
-    --star: 217 100% 70%;
+    /* Brand gradient stops */
+    --gradient-start: 185 100% 50%;
+    --gradient-mid: 220 100% 60%;
+    --gradient-end: 270 100% 65%;
 
-    --sidebar-background: 220 15% 4%;
+    /* Glow tokens */
+    --glow-primary: 185 100% 50%;
+    --glow-accent: 270 100% 65%;
+    --star: 45 100% 70%;
+
+    --sidebar-background: 240 15% 5%;
     --sidebar-foreground: 0 0% 90%;
-    --sidebar-primary: 217 100% 60%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 15% 12%;
+    --sidebar-primary: 185 100% 50%;
+    --sidebar-primary-foreground: 240 20% 3%;
+    --sidebar-accent: 240 15% 12%;
     --sidebar-accent-foreground: 0 0% 90%;
-    --sidebar-border: 220 15% 15%;
-    --sidebar-ring: 217 100% 60%;
+    --sidebar-border: 240 10% 16%;
+    --sidebar-ring: 185 100% 50%;
   }
 }
 
@@ -63,26 +70,47 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--primary) / 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 100% 100%, hsl(var(--accent) / 0.06), transparent);
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-brand {
+    background: linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-mid)), hsl(var(--gradient-end)));
   }
 
   .glow-primary {
-    box-shadow: 0 0 40px hsl(var(--glow-primary) / 0.3),
-                0 0 80px hsl(var(--glow-primary) / 0.15);
+    box-shadow: 0 0 60px hsl(var(--glow-primary) / 0.35),
+                0 0 120px hsl(var(--glow-primary) / 0.15);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 60px hsl(var(--glow-accent) / 0.3),
+                0 0 120px hsl(var(--glow-accent) / 0.12);
   }
 
   .glow-border {
-    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.3),
-                0 0 20px hsl(var(--glow-primary) / 0.1);
+    box-shadow: inset 0 0 0 1px hsl(var(--primary) / 0.4),
+                0 0 30px hsl(var(--glow-primary) / 0.15);
   }
 
   .star-glow {
-    filter: drop-shadow(0 0 8px hsl(var(--star)));
+    filter: drop-shadow(0 0 10px hsl(var(--star)));
+  }
+
+  .glass {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.5);
   }
 }
 
