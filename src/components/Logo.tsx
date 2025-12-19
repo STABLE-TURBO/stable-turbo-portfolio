@@ -21,56 +21,44 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
             <stop offset="50%" stopColor="hsl(220 100% 60%)" />
             <stop offset="100%" stopColor="hsl(270 100% 65%)" />
           </linearGradient>
-          
-          {/* Animated gradient for TURBO */}
-          <linearGradient id="turboAnimated" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="hsl(185 100% 55%)">
-              <animate attributeName="stop-color" 
-                values="hsl(185 100% 55%); hsl(220 100% 65%); hsl(270 100% 70%); hsl(185 100% 55%)" 
-                dur="4s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="50%" stopColor="hsl(220 100% 60%)">
-              <animate attributeName="stop-color" 
-                values="hsl(220 100% 60%); hsl(270 100% 65%); hsl(185 100% 55%); hsl(220 100% 60%)" 
-                dur="4s" repeatCount="indefinite" />
-            </stop>
-            <stop offset="100%" stopColor="hsl(270 100% 70%)">
-              <animate attributeName="stop-color" 
-                values="hsl(270 100% 70%); hsl(185 100% 55%); hsl(220 100% 60%); hsl(270 100% 70%)" 
-                dur="4s" repeatCount="indefinite" />
-            </stop>
+
+          {/* Turbo gradient (static to avoid preview/build issues) */}
+          <linearGradient id="turboGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="hsl(185 100% 55%)" />
+            <stop offset="50%" stopColor="hsl(220 100% 60%)" />
+            <stop offset="100%" stopColor="hsl(270 100% 70%)" />
           </linearGradient>
-          
+
           {/* Glow filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
-          
+
           {/* Strong glow for accent elements */}
           <filter id="strongGlow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
-        
+
         {/* Dynamic swoosh arc */}
         <path
           d="M 200 70 Q 280 15, 360 45 T 460 35"
           fill="none"
-          stroke="url(#turboAnimated)"
+          stroke="url(#turboGradient)"
           strokeWidth="2.5"
           strokeLinecap="round"
           filter="url(#strongGlow)"
           opacity="0.9"
         />
-        
+
         {/* Secondary swoosh */}
         <path
           d="M 220 75 Q 290 25, 370 50 T 455 42"
@@ -80,7 +68,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
           strokeLinecap="round"
           opacity="0.4"
         />
-        
+
         {/* Orbital ring around S */}
         <ellipse
           cx="42"
@@ -94,7 +82,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
           filter="url(#glow)"
           opacity="0.7"
         />
-        
+
         {/* STABLE text */}
         <text
           x="20"
@@ -107,15 +95,15 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
         >
           STABLE
         </text>
-        
-        {/* TURBO text with animated gradient */}
+
+        {/* TURBO text with gradient */}
         <text
           x="255"
           y="62"
           fontFamily="'Sora', 'Outfit', system-ui, sans-serif"
           fontSize="52"
           fontWeight="800"
-          fill="url(#turboAnimated)"
+          fill="url(#turboGradient)"
           letterSpacing="3"
           filter="url(#glow)"
         >
