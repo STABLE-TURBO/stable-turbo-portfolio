@@ -32,10 +32,10 @@
   
   <!-- STABLE text -->
   <text x="20" y="75" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="48" font-weight="700" fill="#fafafa" letter-spacing="2">STABLE</text>
-  
-  <!-- TURBO text -->
-  <text x="210" y="75" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="48" font-weight="700" fill="url(#turboGradient)" letter-spacing="2" filter="url(#glow)">TURBO</text>
-  
+   
+   <!-- TURBO text -->
+   <text x="230" y="75" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="48" font-weight="700" fill="url(#turboGradient)" letter-spacing="2" filter="url(#glow)">TURBO</text>
+   
   <!-- Speed lines -->
   <g opacity="0.5" filter="url(#glow)">
     <line x1="370" y1="40" x2="410" y2="35" stroke="#4d94ff" stroke-width="2" stroke-linecap="round"/>
