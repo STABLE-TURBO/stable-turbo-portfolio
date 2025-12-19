@@ -9,9 +9,9 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  base: mode === "production" ? "./" : "/",
+  base: mode === "production" ? "/" : "/",
   build: {
-    outDir: "docs",
+    outDir: "dist",
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
