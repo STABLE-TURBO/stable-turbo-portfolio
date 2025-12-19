@@ -82,7 +82,7 @@ export const Logo = ({ className = "", size = 'lg' }: LogoProps) => {
         
         {/* TURBO text */}
         <text
-          x="210"
+          x="230"
           y="75"
           fontFamily="'Space Grotesk', 'Inter', system-ui, sans-serif"
           fontSize="48"
