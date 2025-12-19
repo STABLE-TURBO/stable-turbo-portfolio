@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 60" width="840" height="120">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 60" width="920" height="120">
   <defs>
     <linearGradient id="turboGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#1a6eff"/>
-      <stop offset="50%" stop-color="#4d94ff"/>
-      <stop offset="100%" stop-color="#33b5ff"/>
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="50%" stop-color="#3366ff"/>
+      <stop offset="100%" stop-color="#a855f7"/>
     </linearGradient>
     <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
       <feMerge>
         <feMergeNode in="coloredBlur"/>
         <feMergeNode in="SourceGraphic"/>
@@ -15,8 +15,8 @@
   </defs>
   
   <!-- STABLE text -->
-  <text x="20" y="45" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="48" font-weight="700" fill="#fafafa" letter-spacing="2">STABLE</text>
-   
-   <!-- TURBO text -->
-   <text x="230" y="45" font-family="'Space Grotesk', 'Inter', system-ui, sans-serif" font-size="48" font-weight="700" fill="url(#turboGradient)" letter-spacing="2" filter="url(#glow)">TURBO</text>
- </svg>
+  <text x="20" y="45" font-family="'Sora', 'Outfit', system-ui, sans-serif" font-size="48" font-weight="700" fill="#fafafa" letter-spacing="3">STABLE</text>
+  
+  <!-- TURBO text -->
+  <text x="255" y="45" font-family="'Sora', 'Outfit', system-ui, sans-serif" font-size="48" font-weight="800" fill="url(#turboGradient)" letter-spacing="3" filter="url(#glow)">TURBO</text>
+</svg>
